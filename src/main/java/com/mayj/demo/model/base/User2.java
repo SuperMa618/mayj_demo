@@ -1,11 +1,9 @@
 package com.mayj.demo.model.base;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @ClassName User
@@ -15,8 +13,8 @@ import lombok.NoArgsConstructor;
  **/
 
 @Data
-@TableName("user1")
-public class User {
+@TableName("user2")
+public class User2 {
     @TableId(value = "id")
     private int id;
 

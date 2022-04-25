@@ -53,6 +53,7 @@ public class BuildBinaryTree {
         return head;
     }
 
+
     public static void main(String[] args) {
         String[] preOrder = {"A", "B", "D", "H", "I", "E", "J", "C", "F", "K", "G"};
         String[] inOrder = {"H", "D", "I", "B", "E", "J", "A", "F", "K", "C", "G"};

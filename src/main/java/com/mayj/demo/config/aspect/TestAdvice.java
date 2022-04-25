@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestAdvice {
 
-    @Pointcut("execution(public * com.mayj.demo.service.Impl.UserServiceImpl.*(..))")
+    @Pointcut("execution(public * com.mayj.demo.service.Impl.User1ServiceImpl.*(..))")
     private void userHandle(){}
 
     @Around("userHandle()")
