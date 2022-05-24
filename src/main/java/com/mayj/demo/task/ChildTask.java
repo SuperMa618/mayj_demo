@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutorService;
 
 /**
  * @ClassName ChildTask
- * @Description TODO
+ * @Description
  * @Author Mayj
  * @Date 2022/4/25 19:03
  **/
@@ -30,6 +30,7 @@ public class ChildTask {
 
     // 程序执行入口
     public void doExecute() {
+        terminal = false;
         int i = 0;
         while(true) {
             System.out.println(taskName + ":Cycle-" + i + "-Begin");
@@ -38,6 +39,7 @@ public class ChildTask {
             // 处理数据
             taskExecute(datas);
             System.out.println(taskName + ":Cycle-" + i + "-End");
+            System.out.println("terminal:"+terminal);
             if (terminal) {
                 // 只有应用关闭，才会走到这里，用于实现优雅的下线
                 break;
@@ -60,7 +62,7 @@ public class ChildTask {
         try {
             for (Cat cat : datas) {
                 System.out.println(taskName + ":" + cat.toString() + ",ThreadName:" + Thread.currentThread().getName());
-                Thread.sleep(1000L);
+                Thread.sleep(500L);
             }
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
@@ -83,12 +85,7 @@ public class ChildTask {
         // 并发处理拆分的数据，共用一个线程池
         for (final List<Cat> datas : splitDatas) {
             ExecutorService executorService = TaskProcessUtil.getOrInitExecutors(taskName, POOL_SIZE);
-            executorService.submit(new Runnable() {
-                @Override
-                public void run() {
-                    doProcessData(datas, latch);
-                }
-            });
+            executorService.submit(() -> doProcessData(datas, latch));
         }
 
         try {
@@ -101,7 +98,7 @@ public class ChildTask {
     // 获取永动任务数据
     private List<Cat> queryData() {
         List<Cat> datas = new ArrayList<>();
-        for (int i = 0; i < 5; i ++) {
+        for (int i = 0; i < 20; i ++) {
             datas.add(new Cat().setCatName("罗小黑" + i));
         }
         return datas;

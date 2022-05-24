@@ -49,6 +49,35 @@ spring:
         #最小等待连接中的数量,设 0 为没有限制
         min-idle: 0
 
+#RabbitMQ基本配置
+  rabbitmq:
+    addresses: 47.96.66.74:5672
+    username: mayj
+    password: mayj618
+#    virtual-host: /
+    connection-timeout: 15000
+    publisher-returns: true
+#    RabbitMQ Consumer相关配置
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+        #配置签收模式，此处为手动签收
+        acknowledge-mode: manual
+        prefetch: 1
+        retry:
+          initial-interval: 1000
+#    RabbitMQ Producer相关配置
+  http:
+    encoding:
+      charset: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+
+#上传文件及请求大小配置
   servlet:
     multipart:
       max-file-size: 1000MB

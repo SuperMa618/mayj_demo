@@ -4,6 +4,7 @@ import com.mayj.demo.model.base.User1;
 import com.mayj.demo.model.base.User2;
 import com.mayj.demo.service.IUser1Service;
 import com.mayj.demo.service.IUser2Service;
+import com.mayj.demo.task.ChildTask;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -108,5 +109,24 @@ Propagation.REQUIRES_NEW修饰的内部方法依然会单独开启独立事务�
         User2 user2 = new User2();
         user2.setName("李四");
         user2Service.add2RequiredException(user2);
+    }
+
+
+    ChildTask c = new ChildTask("myj");
+    @ApiOperation("启动多线程任务")
+    @PostMapping("startThreadTask")
+    public void startThreadTask() {
+        c.doExecute();
+    }
+
+    @ApiOperation("停止多线程任务")
+    @PostMapping("stopThreadTask")
+    public void stopThreadTask() {
+        try {
+            c.terminal();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName UserServiceImpl
@@ -32,6 +33,22 @@ public class User1ServiceImpl implements IUser1Service {
 
     @Override
     public void add() {
+        new Thread("t1") {
+            @Override
+            public void run() {
+
+                try {
+                    TimeUnit.MINUTES.sleep(1);
+                    Thread.sleep(2000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
+
+
+
         User1 user = new User1();
         user.setName("mayj");
         logger.info("user"+user.toString());

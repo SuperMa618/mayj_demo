@@ -93,6 +93,11 @@
             <version>${swagger.version}</version>
         </dependency>
 
+        <!-- RabbitMQ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <!-- druid数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
