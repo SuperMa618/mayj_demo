@@ -83,3 +83,11 @@ spring:
       max-file-size: 1000MB
       max-request-size: 300MB
       enabled: true
+# accessKeyId
+aliyun:
+  sms:
+    accessKeyId: LTAI4xxxxxxxxxxV9B
+  # accessKeySecret
+    accessKeySecret: LTAI4xxxxxxxxxxV8V9B
+  # 短信模板Code
+    templateCode: SMS_xxxxx74
